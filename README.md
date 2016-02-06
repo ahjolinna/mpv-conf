@@ -1,6 +1,5 @@
-# mpv-conf
+#Ahjolinna's MPV conf build (⌐■_■)
 
-`( ∙_∙) ( ∙_∙)>⌐■-■ (⌐■_■)`
 
 ---input wanted
 
@@ -57,4 +56,5 @@ there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/I
 6) better documentation when most of these features have been || done
 7) one thing I would like to do, is to have same video quality setting  what bomi-player uses (video->Quality Preset)...but they are little bit weird...it would be nice if someone could help with that
 ```
+`( ∙_∙) ( ∙_∙)>⌐■-■ (⌐■_■)`
 
