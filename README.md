@@ -48,13 +48,13 @@ there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/I
 
 `|-o-| ---FUTURE PLANS--- |-o-|`
 ```
-1) make vdpau/vaapi only enabled with the correct hardware/drivers DONE
+1) make vdpau/vaapi only enabled with the correct hardware/drivers ||DONE
 2) make non-free codecs optional
-3) more "automatic" quality settings in the (lua) scripts | semi-DONE
-4) adding laptop & desktop detection it has been added/changed to battery detection DONE
-5) support for upscaling for 4K monitors the 4k upscaling is now on 'ultra-quality'-settings,..
-5.1)  make "4k support" automatic by adding monitor resolution detection (detection support is now added) | semi-DONE
-6) better documentation when most of these features have been done
-7) one thing I would like to do is to have same video quality setting  what bomi uses (video->Quality Preset)...but they are little bit weird...it would be nice if someone could help with it
+3) more "automatic" quality settings in the (lua) scripts || semi-DONE
+4) adding laptop & desktop detection it has been added/changed to battery detection || DONE
+5) support for upscaling for 4K monitors (the 4k upscaling is now on 'ultra-quality'-settings)..|| DONE
+5.1)  make "4k support" automatic by adding monitor resolution detection (detection support is now added) || semi-DONE
+6) better documentation when most of these features have been || done
+7) one thing I would like to do, is to have same video quality setting  what bomi-player uses (video->Quality Preset)...but they are little bit weird...it would be nice if someone could help with that
 ```
 
