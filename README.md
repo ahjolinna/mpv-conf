@@ -51,14 +51,14 @@ if you want to use MVtools you need to install 'vapoursynth-plugin-mvtools' to u
 there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/Interpolation)
 
 ## (MPV) Requirements
-* [`Adobe Source Sans Pro: used in OSD`](http://adobe-fonts.github.io/source-sans-pro/)
-* `youtube-dl: youtube videos and a like`
-* `livestreamer: to watch live video streams (twitch.tv)`
-* `vapoursynth: for some script support like MVtools` '--enable-vapoursynth' needs to be added in mpv build
-* `vapoursynth-plugin-mvtools: Realtime motion interpolating playback in mpv`
-* `acpitool: for "battery mode" detection`
-* `inxi: HIDPI-detection`
-* `libvdpau or libva: for hardware-acceleration support`
+* [`Adobe Source Sans Pro`: used in OSD](http://adobe-fonts.github.io/source-sans-pro/)
+* `youtube-dl`: youtube videos and a like
+* `livestreamer`: to watch live video streams (twitch.tv)
+* `vapoursynth`: for some script support like MVtools '--enable-vapoursynth' needs to be added in mpv build
+* `vapoursynth-plugin-mvtools`: Realtime motion interpolating playback in mpv
+* `acpitool`: for "battery mode" detection
+* `inxi`: HIDPI-detection
+* `libvdpau or libva`: for hardware-acceleration support
 
 `|-o-| ---FUTURE PLANS--- |-o-|`
 ```
