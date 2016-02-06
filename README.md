@@ -12,8 +12,6 @@ This is my first version of MPV(-build-git) with some premade conf files, and wi
 #### Basic info:
 There is 3 different quality settings : hq, mq & lq. MVtools uses medium quality because it's so CPU intensive. There is also the "normal" mpv.desktop file
 ytdl works out of the box, there is A LOT "keyboard bindings", it should support every codec what mpv and ffmpeg can /has (even non-free codecs)*
-#### NOTE:
-the chakra's x265/hevc pkg is way too old to build with this so I had to disable it until it gets updated
 
 * if someone wants I can make version without the non-free codec support , and/or more lighter/simpler one, and/or stable version (not git)..but I will do that after conf files are in better shape
 
