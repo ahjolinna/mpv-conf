@@ -1,0 +1,49 @@
+
+# - gamma: 1.961/x = output gamma => 1.961/0.9338 = 2.1 (mpv assumes 1.961 gamma internally)
+# - zeros for jinc() function: (scale-radius for ewa_lanczos)
+#     3.2383154841662362 4.2410628637960699 5.2427643768701817 ... 8.2453949139520427 ...
+# - target-prim=bt.709 || icc-profile-auto
+
+
+# Video stuff. Note that target-prim/target-trc are set to identify the characteristics for screenshot-tag-colorspace
+#vo-defaults=opengl-hq=scale=haasnsoft:scale-radius=3:cscale=ewa_lanczos:tscale=mitchell:tscale-clamp:scaler-resizes-only:dither-depth=8:target-prim=adobe:target-trc=gamma2.2:icc-cache-dir=~/.cache/mpv:3dlut-size=256x512x256:gamma=0.9338
+#video-sync=display-resample
+
+#[high-quality] #Argon-'s
+#profile-desc="High quality VO settings"
+#vo=opengl-hq:scale=ewa_lanczossharp:cscale=ewa_lanczossoft:dscale=mitchell:tscale=oversample:scale-antiring=0.8:cscale-antiring=0.9:dither-depth=auto:target-prim=bt.709:scaler-resizes-only=yes:sigmoid-upscaling=yes:blend-subtitles=no:correct-downscaling=yes:deband=yes:deband-iterations=4:deband-grain=32
+
+### nnedi3  with 'dxinterop' backend #####
+#vo=opengl-hq:backend=dxinterop:scale=ewa_lanczossharp:cscale=ewa_lanczossoft:interpolation:tscale=mitchell:temporal-dither:prescale=nnedi3:prescale-passes=5:prescale-downscaling-threshold=32:nnedi3-neurons=128:nnedi3-window=8x6
+
+
+#backup 'video stuff.
+#vo=opengl-hq:temporal-dither:waitvsync:scale=ewa_lanczossharp:cscale=ewa_lanczossoft:scaler-resizes-only:dscale=mitchell:target-prim=bt.709:target-trc=bt.1886:interpolation:tscale=robidoux:tscale-clamp
+
+# Defaults for this profile
+#vo=opengl-hq:interpolation
+
+video-sync=display-resample
+
+# MVTools integration for motion smoothing
+#vf=format=yuv420p,vapoursynth=/etc/mpv/filters/mvtools.vpy:2:8
+#vf=format=yuv420p,vapoursynth=/etc/mpv/filters/motioninterpolation.vpy:2:8
+framedrop=vo
+#--------------------------
+
+
+##NOTE: MVTools is in conflict with hardware acceleration ###
+vo=vdpau:no-composite-detect
+vf-clr
+#vf-add=vdpaupp=sharpen=0.10:denoise=0.10:deint=yes:deint-mode=temporal-spatial:pullup:hqscaling=1
+##------------------
+
+
+### Cache (follows the defaults, mostly)
+#cache = yes
+#cache-default = 76800
+#cache-initial = 0
+#cache-seek-min = 512
+#cache-backbuffer = 76800
+#cache-secs = 10.
+#cache-pause = yes 
