@@ -16,7 +16,7 @@ ytdl works out of the box, there is A LOT "keyboard bindings", it should support
 * if someone wants I can make version without the non-free codec support , and/or more lighter/simpler one, and/or stable version (not git)..but I will do that after conf files are in better shape
 
 ####ytdl info:
-ytdl ("youtube and a like") "support"  was  added so it mpv will automatically work with without adding the --ytdl command, aka you only need to add/write mpv <link> nothing else.. nothing more
+ytdl ("youtube and a like") support  was  added so it mpv will automatically work with without adding the additional '--ytdl' command, aka you only need to add/write mpv <link> nothing else.. nothing more
 ```
 Example: mpv https://vimeo.com/148177620
 ```
