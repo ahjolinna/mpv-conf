@@ -1,0 +1,273 @@
+# Maintainer: ahjolinna <ahjolinna@yahoo.com>
+
+# Build with VDPAU or VAAPI support? This only needs to be defined once and will
+# remain until the packages are removed. "1" to enable.
+_vdpau= 
+
+pkgname=mpv-ahjolinna-build-git
+pkgver=20160205.bb6ae0e
+pkgrel=1
+pkgdesc="MPV with my personal config's (uses statically linked ffmpeg). (GIT version)"
+arch=('x86_64')
+depends=('desktop-file-utils'
+         'smbclient'
+         'libguess'
+         'enca'
+         'libxv'
+         'libfdk-aac'
+         'libcdio-paranoia'
+         'openal'
+         #'lua52' not yet in repos
+         'lua'
+         'libssh'
+         'libcaca'
+         'rsound'
+         'libxss'
+         'libdvdnav'
+         'jack2'
+         'libbluray'
+         'libpulse'
+         'x264'
+         'x265'
+         'libbs2b'
+         'libgme'
+         'mesa'
+         'libxinerama'
+         'libxrandr'
+         'libxkbcommon'
+         'hicolor-icon-theme'
+         'sdl2'
+         'lcms2'
+         'lame'
+         'libva'
+         'rubberband'
+         'uchardet'
+         'libarchive'
+         'libsoxr'
+         'v4l-utils'
+         'vapoursynth'
+         'otf-source-sans-pro'
+            )
+license=('GPL3;BSD;LGPL')
+url="http://mpv.io"
+screenshot='http://i.imgur.com/eFjf71A.png'
+makedepends=('git'
+             'python3-docutils'
+             'yasm'
+             'ladspa'
+             'fontconfig'
+             'fribidi'
+             'acpitool'
+             'inxi'
+             )
+optdepends=('youtube-dl: Another way to view youtuve videos with mpv'
+            'zsh-completions: Additional completion definitions for Zsh users'
+            'livestreamer: to watch live video streams (twitch.tv)'
+            'vapoursynth-plugin-mvtools: Realtime motion interpolating playback in mpv'
+            'acpitool: for battery detection'
+            'inxi: HIDPI-detection')
+# check kind of graphic card
+if [ -f /usr/bin/nvidia-settings ]|[ $_vdpau = 1 ]| [ -f /usr/lib/xorg/modules/drivers/nouveau_drv.so ]; then
+    echo "installing libvdpau for NVIDIA users" 
+makedepends+=('libvdpau')
+optdepends+=('libvdpau: hardware-acceleration for NVIDIA users')
+   elif [ -f /usr/bin/aticonfig ]|[ $_vdpau = 1 ]| [ -f /usr/lib/xorg/modules/drivers/radeon_drv.so ]; then
+    echo "installing libvdpau for Radeon users" 
+makedepends+=('libvdpau')
+optdepends+=('libvdpau: hardware-acceleration for Radeon users')
+else
+    echo "installing libva for hardware-acceleration support for opensource driver users " 
+makedepends+=('libva')
+optdepends+=('libva: for open source driver users')
+    fi
+
+provides=('mpv')
+conflicts=('mpv')
+options=('!emptydirs')
+install=mpv-git.install
+
+source=('git+https://github.com/mpv-player/mpv-build.git'
+        'git+https://github.com/mpv-player/mpv.git'
+        'ffmpeg::git+https://github.com/FFmpeg/FFmpeg.git'
+        'git+https://github.com/libass/libass.git'
+        #'git+http://anongit.freedesktop.org/git/fribidi/fribidi.git'
+         'mpv.tar.gz'
+         'mpv-uq.desktop'
+         'mpv-hq.desktop'
+         'mpv-mq.desktop'
+         'mpv-MVtools.desktop'
+         'mpv-lq.desktop')
+
+sha1sums=('SKIP'
+          'SKIP'
+          'SKIP'
+          'SKIP'
+          '54eda2e525ef2bf6bcdf559b6c9fc50d829b2009'
+          '25f05f3a5aacda266d7b592e5719420de41bbeff'
+          'd47b776fdb785de4f97485298a8f4843cfdf9143'
+          '472d2e4ebd8aaf4c25082c0c8da16ebecaf58cf0'
+          '5bfbaea79dc2c640c67ccee255c05527817538e8'
+          'fa081806bf3645102991a8a50ccfc8ca0db8e24f')
+
+backup=('etc/mpv/encoding-profiles.conf')
+
+pkgver() {
+  cd mpv
+  echo "$(git log -1 --format="%cd" --date=short | tr -d '-').$(git log -1 --format="%h")"
+}
+
+prepare() {
+  cd mpv-build
+  ln -s ../mpv
+  ln -s ../ffmpeg
+  ln -s ../libass
+ #ln -s ../fribidi
+
+
+echo "cheking if VPDAU or VAAPI will be enabled or disabled" 
+ if [ $_vdpau = 1 ]|| [ -f /usr/lib/libvdpau.so ]; then
+ echo "building with vdpau support" 
+  # Set ffmpeg/libass/fribidi/mpv flags
+  echo "--disable-programs \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-libfreetype \
+  --enable-libbluray  \
+  --enable-libpulse \
+  --enable-libopus  \
+  --enable-libvorbis \
+  --enable-libvpx \
+  --enable-libxvid \
+  --enable-libmp3lame \
+  --enable-libfdk-aac \
+  --enable-libtheora \
+  --enable-libssh \
+  --enable-nonfree \
+  --enable-ladspa \
+  --enable-libbs2b  \
+  --enable-avisynth  \
+  --enable-avresample  \
+  --enable-fontconfig \
+  --enable-libass \
+  --enable-openal \
+  --enable-opengl \
+  --enable-runtime-cpudetect \
+  --enable-swresample \
+  --enable-version3 \
+  --enable-vdpau" > ffmpeg_options
+  
+  echo "--prefix=/usr \
+  --confdir=/etc/mpv \
+  --enable-openal \
+  --disable-sdl1 \
+  --enable-sdl2 \
+  --enable-libmpv-shared \
+  --enable-zsh-comp \
+  --enable-pulse \
+  --enable-egl-x11 \
+  --enable-wayland \
+  --enable-vdpau \
+  --enable-vaapi \
+  --enable-libsmbclient \
+  --enable-dvdread \
+  --enable-libarchive \
+  --enable-gpl3 \
+  --enable-vapoursynth \
+  --enable-vdpau-hwaccel" > mpv_options
+  
+  else
+echo "building with vaapi support"
+  echo "--disable-programs \
+  --enable-libx264 \
+  --enable-libx265 \
+  --enable-libfreetype \
+  --enable-libbluray  \
+  --enable-libpulse \
+  --enable-libopus  \
+  --enable-libvorbis \
+  --enable-libvpx \
+  --enable-libxvid \
+  --enable-libmp3lame \
+  --enable-libfdk-aac \
+  --enable-libtheora \
+  --enable-libssh \
+  --enable-nonfree \
+  --enable-ladspa \
+  --enable-libbs2b  \
+  --enable-avisynth  \
+  --enable-avresample  \
+  --enable-fontconfig \
+  --enable-libass \
+  --enable-openal \
+  --enable-opengl \
+  --enable-runtime-cpudetect \
+  --enable-swresample \
+  --enable-version3"  > ffmpeg_options
+  
+  echo "--prefix=/usr \
+  --confdir=/etc/mpv \
+  --enable-openal \
+  --disable-sdl1 \
+  --enable-sdl2 \
+  --enable-libmpv-shared \
+  --enable-zsh-comp \
+  --enable-pulse \
+  --enable-egl-x11 \
+  --enable-wayland \
+  --enable-vaapi \
+  --enable-libsmbclient \
+  --enable-dvdread \
+  --enable-libarchive \
+  --enable-gpl3 \
+  --enable-vapoursynth \
+  --enable-vaapi-hwaccel" > mpv_options
+fi
+ # Download Waf script
+  #./bootstrap.py
+   # point python to python3
+  sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python3|' ${srcdir}/mpv/bootstrap.py
+  # initialize
+  cd mpv
+  ./bootstrap.py
+  sed -i 's/vendor-completions/site-functions/' wscript_build.py
+
+  # waf looking for python2...
+  sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python3|' ${srcdir}/mpv/waf
+  sed -i 's/$? != 0/$? >> 8 != 0/' TOOLS/zsh.pl
+}
+
+build() {
+  cd mpv-build
+  ./build
+}
+
+package() {
+  cd mpv-build
+  DESTDIR="${pkgdir}" ./install
+
+  install -Dm755 mpv/TOOLS/mpv_identify.sh "${pkgdir}/usr/bin/mpv-identify"
+  install -Dm755 mpv/TOOLS/umpv "${pkgdir}/usr/bin/umpv"
+
+  install -Dm644 mpv/DOCS/encoding.rst "${pkgdir}/usr/share/doc/mpv/encoding.rst"
+  install -Dm644 mpv/DOCS/edl-mpv.rst "${pkgdir}/usr/share/doc/mpv/edl-mpv.rst"
+  install -Dm644 mpv/DOCS/client-api-changes.rst "${pkgdir}/usr/share/doc/mpv/client-api-changes.rst"
+  install -Dm644 mpv/DOCS/contribute.md "${pkgdir}/usr/share/doc/mpv/contribute.md"
+  
+    # install the .desktop files
+  install -Dm644 "${srcdir}/mpv-lq.desktop" "${pkgdir}/usr/share/applications/mpv-lq.desktop"
+  install -Dm644 "${srcdir}/mpv-mq.desktop" "${pkgdir}/usr/share/applications/mpv-mq.desktop"
+  install -Dm644 "${srcdir}/mpv-hq.desktop" "${pkgdir}/usr/share/applications/mpv-hq.desktop"
+  install -Dm644 "${srcdir}/mpv-uq.desktop" "${pkgdir}/usr/share/applications/mpv-uq.desktop"
+  install -Dm644 "${srcdir}/mpv-MVtools.desktop" "${pkgdir}/usr/share/applications/mpv-MVtools.desktop"
+  
+    #install configure files
+  cp -R ${srcdir}/mpv/etc*/* ${pkgdir}/etc/mpv
+    install -d "${pkgdir}/etc/mpv/"
+  
+
+ # sed 's|/usr/local/etc/mpv.conf|/etc/mpv.conf|g' -i "${pkgdir}/usr/share/doc/mpv/mpv.conf"
+
+  (cd mpv/TOOLS/lua; for i in $(find . -type f); do install -Dm644 "${i}" "${pkgdir}/usr/share/mpv/scripts/${i}"; done)
+
+  (cd mpv/DOCS/client_api_examples; for i in $(find . -type f); do install -Dm644 "${i}" "${pkgdir}/usr/share/mpv/client_api_examples/${i}"; done)
+}
