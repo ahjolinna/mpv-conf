@@ -42,8 +42,8 @@ NOTE: if you want to use MVtools you need to install 'vapoursynth-plugin-mvtools
 ```
 
 there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/Interpolation)
-|-o-| ---FUTURE PLANS--- |-o-|
-
+`|-o-| ---FUTURE PLANS--- |-o-|`
+```
 1) make vdpau/vaapi only enabled with the correct hardware/drivers DONE
 2) make non-free codecs optional
 3) more "automatic" quality settings in the (lua) scripts | semi-DONE
@@ -52,5 +52,5 @@ there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/I
 5.1)  make "4k support" automatic by adding monitor resolution detection (detection support is now added) | semi-DONE
 6) better documentation when most of these features have been done
 7) one thing I would like to do is to have same video quality setting  what bomi uses (video->Quality Preset)...but they are little bit weird...it would be nice if someone could help with it
-
+```
 
