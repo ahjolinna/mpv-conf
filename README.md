@@ -6,15 +6,19 @@
 
 ![mpv-conf Preview](http://i.imgur.com/5B881oX.png)
 
-Summary : this is my first version of MPV(-build-git) with some premade conf files, and with MVtools support ( Motion Interpolation aka smooth motion).
+#### Summary : 
+This is my first version of MPV(-build-git) with some premade conf files, and with MVtools support ( Motion Interpolation aka smooth motion).
 
-info: there is 3 different quality settings : hq, mq & lq. MVtools uses medium quality because it's so CPU intensive. There is also the "normal" mpv.desktop file
+#### Basic info:
+There is 3 different quality settings : hq, mq & lq. MVtools uses medium quality because it's so CPU intensive. There is also the "normal" mpv.desktop file
 ytdl works out of the box, there is A LOT "keyboard bindings", it should support every codec what mpv and ffmpeg can /has (even non-free codecs)*
-NOTE: the chakra's x265/hevc pkg is way too old to build with this so I had to disable it until it gets updated
+#### NOTE:
+the chakra's x265/hevc pkg is way too old to build with this so I had to disable it until it gets updated
 
 * if someone wants I can make version without the non-free codec support , and/or more lighter/simpler one, and/or stable version (not git)..but I will do that after conf files are in better shape
 
-ytdl info: ytdl ("youtube and a like") "support"  was  added so it mpv will automatically work with without adding the --ytdl command, aka you only need to add/write mpv <link> nothing else.. nothing more
+####ytdl info:
+ytdl ("youtube and a like") "support"  was  added so it mpv will automatically work with without adding the --ytdl command, aka you only need to add/write mpv <link> nothing else.. nothing more
 ```
 Example: mpv https://vimeo.com/148177620
 ```
@@ -25,12 +29,13 @@ livestreamer -p mpv <twitch link> <quality> --player-continuous-http
 ```
 Example: livestreamer -p mpv http://www.twitch.tv/angryjoeshow best --player-continuous-http
 ```
-side note: the <quality> "command" is for the stream quality** 
+
+#### side note:
+the <quality> "command" is for the stream quality** 
 **You can get the list of available quality formats using:  "youtube-dl <link>  --list-formats"
 
-INSTALL::the "stable" version  is more lighter & OC stable,  it also uses the chakra's own ffmpeg, when the git version  uses its own ffmpeg-git and libass-git(are not in conflict with repo version)
-
-NOTE: if you want to use MVtools you need to install 'vapoursynth-plugin-mvtools' to use it, BUT remember it's really CPU demanding feature
+####NOTE:
+if you want to use MVtools you need to install 'vapoursynth-plugin-mvtools' to use it, BUT remember it's really CPU demanding feature
 ```
     What Smooth Motion is not, is a frame interpolation system—it will not introduce the “soap opera effect” like you see on 120Hz+ TVs, or reduce 24p judder.
 
