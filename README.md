@@ -42,6 +42,7 @@ NOTE: if you want to use MVtools you need to install 'vapoursynth-plugin-mvtools
 ```
 
 there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/Interpolation)
+
 `|-o-| ---FUTURE PLANS--- |-o-|`
 ```
 1) make vdpau/vaapi only enabled with the correct hardware/drivers DONE
