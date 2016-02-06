@@ -24,7 +24,7 @@ ytdl ("youtube and a like") support  was  added so it mpv will automatically wor
 ```
 Example: mpv https://vimeo.com/148177620
 ```
-Twitch live streaming info: If you want to watch live twich video streams you need to install 'livestreamer' app from ccr, and to watch them with MPV you need to use this following command :
+Twitch live streaming info: If you want to watch live twich.tv video streams you need to install 'livestreamer' app, and to watch them with MPV you need to use this following command :
 ```
 livestreamer -p mpv <twitch link> <quality> --player-continuous-http
 ``` 
