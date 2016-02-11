@@ -13,8 +13,13 @@ This is my first version of MPV(-build-git) with some premade conf files, and wi
 
 * There is 4 different quality settings : uq, hq, mq & lq. MVtools uses medium quality because it's so CPU intensive. There is also the "normal" mpv.desktop file.
 
-* You can also use `--script-opts=ao-level=<level>` to force a specific quality level from command line. Upon start will select a level (o.uq/o.hq/o.mq/o.lq) whose options will then be applied.
-
+* You can also use `--script-opts=ao-level=<level>` to force a specific quality level from command line. Upon start will select a level (uq/hq/mq/lq) whose options will then be applied.
+```
+    uq = ultra-quality
+    hq = high-quality
+    mq = medium-quality
+    lq = low-quality
+```
 * the plan is to have only 2 premade quality desktop file (max 3), the normal and MVtools. The idea is that uq would be for 4k owners only, lq is "fallback for laptop's and hq is the default one...mq would be for MVtools.
 
 * if someone wants I can make version without the non-free codec support , and/or more lighter/simpler one, and/or stable version (not git)..but I will do that after conf files are in better shape
