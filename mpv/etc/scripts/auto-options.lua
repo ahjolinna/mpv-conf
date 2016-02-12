@@ -29,7 +29,7 @@ local o = {
     hq = "high-quality",
     mq = "medium-quality",
     lq = "low-quality",
-    highres_threshold = "1920x1200@60.00hz",
+    highres_threshold = "1920x1080@60.00hz",
     verbose = true,
     duration = 2,
     duration_err_mult = 2,
@@ -57,9 +57,9 @@ vo_opts = {
         ["tscale"] = "oversample",
         ["scale-antiring"]  = "1",
         ["cscale-antiring"] = "0.9",
+        ["scale-radius"]    = "3",
 
         ["dither-depth"]        = "auto",
-        ["target-prim"]         = "bt.709",
         ["scaler-resizes-only"] = "yes",
         ["sigmoid-upscaling"]   = "yes",
         ["blend-subtitles"]     = "no",
@@ -68,16 +68,21 @@ vo_opts = {
         ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]              = "yes",
-        ["prescale"]            = "nnedi3",
         ["prescale-passes"]     = "1",
         ["prescale-downscaling-threshold"] = "1.5",
+        
+         ["prescale"]            = "nnedi3",
         ["nnedi3-upload"]       = "shader",
         ["nnedi3-neurons"]      = "64",
         ["nnedi3-window"]       = "8x4",
         
         
-        ["target-trc"]          = "bt.1886",
+        ["gamma"]                = "0.9338",
+        ["target-prim"]         = "adobe",
+        ["target-trc"]          = "gamma2.2",
+        ["icc-profile-auto"] = "yes",
         ["3dlut-size"]        = "256x256x256",
+        ["blend-subtitles"]     = "video",
     },
 
     [o.hq] = {
@@ -87,28 +92,25 @@ vo_opts = {
         ["tscale"] = "oversample",
         ["scale-antiring"]  = "1",
         ["cscale-antiring"] = "0.9",
+        ["scale-radius"]    = "3",
 
         ["dither-depth"]        = "auto",
-        ["target-prim"]         = "bt.709",
         ["scaler-resizes-only"] = "yes",
         ["sigmoid-upscaling"]   = "yes",
         ["blend-subtitles"]     = "no",
 
-        ["interpolation"]       = "yes",
-        ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]              = "yes",
         ["prescale"]            = "superxbr",
-  --    ["prescale"]            = "nnedi3",
         ["prescale-passes"]     = "2",
         ["prescale-downscaling-threshold"] = "1.5",
-   --   ["nnedi3-upload"]       = "shader",
-   --   ["nnedi3-neurons"]      = "64",
-    --  ["nnedi3-window"]       = "8x4",
         
-        
-        ["target-trc"]          = "bt.1886",
+        ["gamma"]                = "0.9338",
+        ["target-prim"]         = "adobe",
+        ["target-trc"]          = "gamma2.2",
+        ["icc-profile-auto"] = "yes",
         ["3dlut-size"]        = "256x256x256",
+        ["blend-subtitles"]     = "video",
     },
 
     [o.mq] = {
@@ -118,17 +120,24 @@ vo_opts = {
         ["tscale"] = "oversample",
         ["scale-antiring"]  = "0.8",
         ["cscale-antiring"] = "0.9",
+        ["scale-radius"]    = "3",
 
         ["dither-depth"]        = "auto",
-        ["target-prim"]         = "bt.709",
         ["scaler-resizes-only"] = "yes",
         ["sigmoid-upscaling"]   = "yes",
         ["blend-subtitles"]     = "yes",
 
-        ["interpolation"]     =  "yes" ,
+        ["interpolation"]     =  function () return is_high_res(o) and "no" or "yes" end,
         ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]            = "yes",
+        
+        ["gamma"]                = "0.9338",
+        ["target-prim"]         = "adobe",
+        ["target-trc"]          = "gamma2.2",
+        ["icc-profile-auto"] = "yes",
+        ["3dlut-size"]        = "256x256x256",
+        ["blend-subtitles"]     = "yes",
     },
 
     [o.lq] = {
@@ -143,6 +152,7 @@ vo_opts = {
         ["blend-subtitles"]     = "yes",
 
         ["interpolation"]     = function () return is_high_res(o) and "no" or "yes" end,
+        ["blend-subtitles"]     = "yes",
     },
 }
 
@@ -151,25 +161,22 @@ vo_opts = {
 
 options = {
     [o.uq] = {
-        ["options/vo"] = function () return vo_property_string(o.hq, vo, vo_opts) end,
-      --  ["options/video-sync"] = "display-resample",
-        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
+        ["options/vo"] = function () return vo_property_string(o.uq, vo, vo_opts) end,
         ["options/hwdec"] = "auto",
         ["options/vd-lavc-threads"] = "16",
     },
     
     [o.hq] = {
         ["options/vo"] = function () return vo_property_string(o.hq, vo, vo_opts) end,
-       -- ["options/video-sync"] = "display-resample",
-        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
         ["options/hwdec"] = "auto",
         ["options/vd-lavc-threads"] = "16",
+        ["options/vf-add"] = "vdpaupp=sharpen=0.10:denoise=0.10:deint=yes:deint-mode=temporal-spatial:pullup:hqscaling=1",
+       
     },
 
     [o.mq] = {
         ["options/vo"] = function () return vo_property_string(o.mq, vo, vo_opts) end,
-        ["options/video-sync"] = "display-resample",
-        --["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
+        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
         ["options/hwdec"] = "auto",
     },
 
