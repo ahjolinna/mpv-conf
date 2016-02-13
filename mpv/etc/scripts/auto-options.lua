@@ -82,6 +82,7 @@ vo_opts = {
         ["target-trc"]          = "bt.1886",
         ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "video",
+        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 
     [o.hq] = {
@@ -107,8 +108,9 @@ vo_opts = {
         ["gamma"]                = "0.9338",
         ["target-prim"]         = "bt.2020",
         ["target-trc"]          = "bt.1886",
-        ["3dlut-size"]        = "256x256x256",
+        ["3dlut-size"]          = "256x256x256",
         ["blend-subtitles"]     = "video",
+        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 
     [o.mq] = {
@@ -135,6 +137,7 @@ vo_opts = {
         ["target-trc"]          = "bt.1886",
         ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "yes",
+        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 
     [o.lq] = {
@@ -150,6 +153,7 @@ vo_opts = {
 
         ["interpolation"]     = function () return is_high_res(o) and "no" or "yes" end,
         ["blend-subtitles"]     = "yes",
+        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 }
 
