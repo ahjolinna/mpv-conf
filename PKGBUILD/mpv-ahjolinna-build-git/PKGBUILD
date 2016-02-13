@@ -5,7 +5,7 @@
 _vdpau= 
 
 pkgname=mpv-ahjolinna-build-git
-pkgver=20160205.bb6ae0e
+pkgver=20160212.90089b8
 pkgrel=1
 pkgdesc="MPV with my personal config's (uses statically linked ffmpeg). (GIT version)"
 arch=('x86_64')
@@ -91,23 +91,27 @@ source=('git+https://github.com/mpv-player/mpv-build.git'
         'ffmpeg::git+https://github.com/FFmpeg/FFmpeg.git'
         'git+https://github.com/libass/libass.git'
         #'git+http://anongit.freedesktop.org/git/fribidi/fribidi.git'
+        'ftp://ftp.ritual.org/common/ColorManagement/BT.709_Profiles.zip'
          'mpv.tar.gz'
          'mpv-uq.desktop'
          'mpv-hq.desktop'
          'mpv-mq.desktop'
          'mpv-MVtools.desktop'
-         'mpv-lq.desktop')
+         'mpv-lq.desktop'
+         )
 
 sha1sums=('SKIP'
           'SKIP'
           'SKIP'
           'SKIP'
-          '54eda2e525ef2bf6bcdf559b6c9fc50d829b2009'
+          '32f702fc68ef418fd5af81028ac88acb0f140446'
+          'c7cc562c039500f7f3eecee3e0e73829d0600e75'
           '25f05f3a5aacda266d7b592e5719420de41bbeff'
           'd47b776fdb785de4f97485298a8f4843cfdf9143'
           '472d2e4ebd8aaf4c25082c0c8da16ebecaf58cf0'
           '5bfbaea79dc2c640c67ccee255c05527817538e8'
           'fa081806bf3645102991a8a50ccfc8ca0db8e24f')
+
 
 backup=('etc/mpv/encoding-profiles.conf')
 
@@ -259,6 +263,11 @@ package() {
   install -Dm644 "${srcdir}/mpv-hq.desktop" "${pkgdir}/usr/share/applications/mpv-hq.desktop"
   install -Dm644 "${srcdir}/mpv-uq.desktop" "${pkgdir}/usr/share/applications/mpv-uq.desktop"
   install -Dm644 "${srcdir}/mpv-MVtools.desktop" "${pkgdir}/usr/share/applications/mpv-MVtools.desktop"
+  
+  # install BT.709 ICC profiles (https://github.com/mpv-player/mpv/issues/534#issuecomment-35823203)
+   install -Dm755 "${srcdir}/BT.709_Profiles/BT.709.gamma.1.95.icc" "${pkgdir}/usr/share/color/icc/BT.709_Profiles/BT.709.gamma.1.95.icc"
+   install -Dm755 "${srcdir}/BT.709_Profiles/BT.709.gamma.1.95.icc" "${pkgdir}/usr/share/color/icc/BT.709_Profiles/BT.709.icc"
+   install -Dm755 "${srcdir}/BT.709_Profiles/BT.709.gamma.1.95.icc" "${pkgdir}/usr/share/color/icc/BT.709_Profiles/BT.709.linear.icc"
   
     #install configure files
   cp -R ${srcdir}/mpv/etc*/* ${pkgdir}/etc/mpv

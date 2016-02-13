@@ -78,9 +78,8 @@ vo_opts = {
         
         
         ["gamma"]                = "0.9338",
-        ["target-prim"]         = "adobe",
-        ["target-trc"]          = "gamma2.2",
-        ["icc-profile-auto"] = "yes",
+        ["target-prim"]         = "bt.2020",
+        ["target-trc"]          = "bt.1886",
         ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "video",
     },
@@ -106,9 +105,8 @@ vo_opts = {
         ["prescale-downscaling-threshold"] = "1.5",
         
         ["gamma"]                = "0.9338",
-        ["target-prim"]         = "adobe",
-        ["target-trc"]          = "gamma2.2",
-        ["icc-profile-auto"] = "yes",
+        ["target-prim"]         = "bt.2020",
+        ["target-trc"]          = "bt.1886",
         ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "video",
     },
@@ -133,9 +131,8 @@ vo_opts = {
         ["deband"]            = "yes",
         
         ["gamma"]                = "0.9338",
-        ["target-prim"]         = "adobe",
-        ["target-trc"]          = "gamma2.2",
-        ["icc-profile-auto"] = "yes",
+        ["target-prim"]         = "bt.2020",
+        ["target-trc"]          = "bt.1886",
         ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "yes",
     },
