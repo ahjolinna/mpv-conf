@@ -92,7 +92,7 @@ source=('git+https://github.com/mpv-player/mpv-build.git'
         'git+https://github.com/libass/libass.git'
         #'git+http://anongit.freedesktop.org/git/fribidi/fribidi.git'
         'ftp://ftp.ritual.org/common/ColorManagement/BT.709_Profiles.zip'
-         'mpv.tar.gz'
+         'https://github.com/ahjolinna/mpv-conf/raw/master/PKGBUILD/mpv.tar.gz'
          'mpv-uq.desktop'
          'mpv-hq.desktop'
          'mpv-mq.desktop'
@@ -105,13 +105,12 @@ sha1sums=('SKIP'
           'SKIP'
           'SKIP'
           '32f702fc68ef418fd5af81028ac88acb0f140446'
-          'c7cc562c039500f7f3eecee3e0e73829d0600e75'
+          '6d7e7a022c67e92d72eacc2eafaa346695474632'
           '25f05f3a5aacda266d7b592e5719420de41bbeff'
           'd47b776fdb785de4f97485298a8f4843cfdf9143'
           '472d2e4ebd8aaf4c25082c0c8da16ebecaf58cf0'
           '5bfbaea79dc2c640c67ccee255c05527817538e8'
           'fa081806bf3645102991a8a50ccfc8ca0db8e24f')
-
 
 backup=('etc/mpv/encoding-profiles.conf')
 
