@@ -30,6 +30,7 @@ local o = {
     mq = "medium-quality",
     lq = "low-quality",
     highres_threshold = "1920x1080@60.00hz",
+    force_low_res = false,
     verbose = true,
     duration = 2,
     duration_err_mult = 2,
@@ -54,7 +55,7 @@ vo_opts = {
         ["scale"]  = "ewa_lanczossharp",
         ["cscale"] = "ewa_lanczossoft",
         ["dscale"] = "mitchell",
-        ["tscale"] = "oversample",
+        ["tscale"] = "triangle",
         ["scale-antiring"]  = "1",
         ["cscale-antiring"] = "0.9",
         ["scale-radius"]    = "3",
@@ -82,14 +83,13 @@ vo_opts = {
         ["target-trc"]          = "bt.1886",
         ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "video",
-        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 
     [o.hq] = {
         ["scale"]  = "ewa_lanczossharp",
         ["cscale"] = "ewa_lanczossoft",
         ["dscale"] = "mitchell",
-        ["tscale"] = "oversample",
+        ["tscale"] = "triangle",
         ["scale-antiring"]  = "1",
         ["cscale-antiring"] = "0.9",
         ["scale-radius"]    = "3",
@@ -108,16 +108,15 @@ vo_opts = {
         ["gamma"]                = "0.9338",
         ["target-prim"]         = "bt.2020",
         ["target-trc"]          = "bt.1886",
-        ["3dlut-size"]          = "256x256x256",
+        ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "video",
-        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 
     [o.mq] = {
         ["scale"]  = "spline36",
         ["cscale"] = "spline36",
         ["dscale"] = "mitchell",
-        ["tscale"] = "oversample",
+        ["tscale"] = "triangle",
         ["scale-antiring"]  = "0.8",
         ["cscale-antiring"] = "0.9",
         ["scale-radius"]    = "3",
@@ -137,13 +136,12 @@ vo_opts = {
         ["target-trc"]          = "bt.1886",
         ["3dlut-size"]        = "256x256x256",
         ["blend-subtitles"]     = "yes",
-        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 
     [o.lq] = {
         ["scale"]  = "spline36",
         ["dscale"] = "mitchell",
-        ["tscale"] = "oversample",
+        ["tscale"] = "triangle",
 
         ["dither-depth"]        = "auto",
         ["target-prim"]         = "bt.709",
@@ -153,7 +151,6 @@ vo_opts = {
 
         ["interpolation"]     = function () return is_high_res(o) and "no" or "yes" end,
         ["blend-subtitles"]     = "yes",
-        ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 }
 
@@ -198,6 +195,7 @@ mp.observe_property("vo-configured", "bool",
 -- Determined level and set the appropriate options
 
 function main()
+    o.force_low_res = mp.get_opt("ao-flr")
     o.level = determine_level(o, vo, vo_opts, options)
     o.err_occ = false
     for k, v in pairs(options[o.level]) do
