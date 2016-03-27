@@ -5,7 +5,7 @@
 _vdpau= 
 
 pkgname=mpv-ahjolinna-build-git
-pkgver=20160212.90089b8
+pkgver=20160326.4470976
 pkgrel=1
 pkgdesc="MPV with my personal config's (uses statically linked ffmpeg). (GIT version)"
 arch=('x86_64')
@@ -17,7 +17,7 @@ depends=('desktop-file-utils'
          'libfdk-aac'
          'libcdio-paranoia'
          'openal'
-         #'lua52' not yet in repos
+         'luajit'
          'lua'
          'libssh'
          'libcaca'
@@ -92,25 +92,27 @@ source=('git+https://github.com/mpv-player/mpv-build.git'
         'git+https://github.com/libass/libass.git'
         #'git+http://anongit.freedesktop.org/git/fribidi/fribidi.git'
         'ftp://ftp.ritual.org/common/ColorManagement/BT.709_Profiles.zip'
-         'https://github.com/ahjolinna/mpv-conf/raw/master/PKGBUILD/mpv.tar.gz'
-         'mpv-uq.desktop'
-         'mpv-hq.desktop'
-         'mpv-mq.desktop'
-         'mpv-MVtools.desktop'
-         'mpv-lq.desktop'
+        'https://github.com/ahjolinna/mpv-conf/raw/master/PKGBUILD/mpv.tar.gz'
+        #'mpv.tar.gz'
+        'mpv-uq.desktop'
+        'mpv-hq.desktop'
+        'mpv-mq.desktop'
+        'mpv-MVtools.desktop'
+        'mpv-lq.desktop'
          )
 
-sha1sums=('SKIP'
-          'SKIP'
-          'SKIP'
-          'SKIP'
-          '32f702fc68ef418fd5af81028ac88acb0f140446'
-          '6d7e7a022c67e92d72eacc2eafaa346695474632'
-          '25f05f3a5aacda266d7b592e5719420de41bbeff'
-          'd47b776fdb785de4f97485298a8f4843cfdf9143'
-          '472d2e4ebd8aaf4c25082c0c8da16ebecaf58cf0'
-          '5bfbaea79dc2c640c67ccee255c05527817538e8'
-          'fa081806bf3645102991a8a50ccfc8ca0db8e24f')
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'd53aa2c59350a8e364b1a18a5509ba995826f7d37e34ad029251bee082f3c360'
+            '0b744525d20fa950c7826f4154e1238d2f1d9dad07b223abb24e5afaa7a13bc4'
+            'f76c836c56ce84659a4e4256cc0afb515f87aa77e33dfa164e25f79ee5e2bdd5'
+            'ddd18dbccdaa4513586cb97299e88564e3289940f25d7ebe762c4482fbad3809'
+            '8cf41f23572417836084209fce343f779e72dea9688dc84e23e8eb913d002d5f'
+            '9a7f7d78a71c5492709abfb8f4ad598fa02867e71b5645bb639850163264762b'
+            'e02f7b07653ea4ce9745b9f699954f5a4eafd416ada5a5d032c7dd7294921f90')
+
 
 backup=('etc/mpv/encoding-profiles.conf')
 
@@ -161,6 +163,9 @@ echo "cheking if VPDAU or VAAPI will be enabled or disabled"
   
   echo "--prefix=/usr \
   --confdir=/etc/mpv \
+  --disable-test \
+  --disable-build-date
+  --enable-libmpv-shared \
   --enable-openal \
   --disable-sdl1 \
   --enable-sdl2 \
@@ -174,7 +179,9 @@ echo "cheking if VPDAU or VAAPI will be enabled or disabled"
   --enable-libsmbclient \
   --enable-dvdread \
   --enable-libarchive \
+  --lua=luajit \
   --enable-gpl3 \
+  --enable-libavdevice \
   --enable-vapoursynth \
   --enable-vdpau-hwaccel" > mpv_options
   
@@ -212,6 +219,8 @@ echo "building with vaapi support"
   --enable-openal \
   --disable-sdl1 \
   --enable-sdl2 \
+  --disable-test \
+  --disable-build-date
   --enable-libmpv-shared \
   --enable-zsh-comp \
   --enable-pulse \
@@ -221,7 +230,9 @@ echo "building with vaapi support"
   --enable-libsmbclient \
   --enable-dvdread \
   --enable-libarchive \
+  --lua=luajit \
   --enable-gpl3 \
+  --enable-libavdevice \
   --enable-vapoursynth \
   --enable-vaapi-hwaccel" > mpv_options
 fi
@@ -276,6 +287,4 @@ package() {
  # sed 's|/usr/local/etc/mpv.conf|/etc/mpv.conf|g' -i "${pkgdir}/usr/share/doc/mpv/mpv.conf"
 
   (cd mpv/TOOLS/lua; for i in $(find . -type f); do install -Dm644 "${i}" "${pkgdir}/usr/share/mpv/scripts/${i}"; done)
-
-  (cd mpv/DOCS/client_api_examples; for i in $(find . -type f); do install -Dm644 "${i}" "${pkgdir}/usr/share/mpv/client_api_examples/${i}"; done)
 }
