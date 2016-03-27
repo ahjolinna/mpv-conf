@@ -72,7 +72,7 @@ vo_opts = {
         ["prescale-passes"]     = "1",
         ["prescale-downscaling-threshold"] = "1.5",
         
-         ["prescale"]            = "nnedi3",
+         ["prescale-luma"]            = "nnedi3",
         ["nnedi3-upload"]       = "shader",
         ["nnedi3-neurons"]      = "64",
         ["nnedi3-window"]       = "8x4",
@@ -101,7 +101,7 @@ vo_opts = {
 
         ["correct-downscaling"] = "yes",
         ["deband"]              = "yes",
-        ["prescale"]            = "superxbr",
+        ["prescale-luma"]            = "superxbr",
         ["prescale-passes"]     = "2",
         ["prescale-downscaling-threshold"] = "1.5",
         
