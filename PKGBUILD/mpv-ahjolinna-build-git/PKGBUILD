@@ -1,11 +1,11 @@
 # Maintainer: ahjolinna <ahjolinna@yahoo.com>
 
 # Build with VDPAU or VAAPI support? This only needs to be defined once and will
-# remain until the packages are removed. "1" to enable.
+# remain until the packages are removed. "1" to enable (0 for VAAPI). 
 _vdpau= 
 
 pkgname=mpv-ahjolinna-build-git
-pkgver=20160326.4470976
+pkgver=20160328.e1264d3
 pkgrel=1
 pkgdesc="MPV with my personal config's (uses statically linked ffmpeg). (GIT version)"
 arch=('x86_64')
@@ -106,12 +106,12 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'd53aa2c59350a8e364b1a18a5509ba995826f7d37e34ad029251bee082f3c360'
-            '0b744525d20fa950c7826f4154e1238d2f1d9dad07b223abb24e5afaa7a13bc4'
-            'f76c836c56ce84659a4e4256cc0afb515f87aa77e33dfa164e25f79ee5e2bdd5'
-            'ddd18dbccdaa4513586cb97299e88564e3289940f25d7ebe762c4482fbad3809'
-            '8cf41f23572417836084209fce343f779e72dea9688dc84e23e8eb913d002d5f'
-            '9a7f7d78a71c5492709abfb8f4ad598fa02867e71b5645bb639850163264762b'
-            'e02f7b07653ea4ce9745b9f699954f5a4eafd416ada5a5d032c7dd7294921f90')
+            '822fa3b05731817d8af4a38ae3e0e8dd85e8ce052ed428e4acf3b4cce27a5339'
+            '7c85af8c82989b52da31e67d17018835317caea7bb6bc878b009b437ac9eb4f7'
+            '825df85044542a027553cce2ffd6be6c6397e0552b6fd8ef5caf6a4c98eb35c5'
+            'db04ab8d8c91d35b599702eb1477ba77c0262f90b9e8a098c953497158fe92ea'
+            '0d293ac805665097656747bea1e69ad1f63aa6a5e0ca502eb462508216eeabcf'
+            '74c78cce75a724e13c4f780cbe4735129fd239fefc1376f383a3cfaf103a6fee')
 
 
 backup=('etc/mpv/encoding-profiles.conf')
