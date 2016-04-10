@@ -69,10 +69,11 @@ vo_opts = {
         ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]              = "yes",
+        ["waitvsync"]           = "yes",
         ["prescale-passes"]     = "1",
         ["prescale-downscaling-threshold"] = "1.5",
         
-         ["prescale-luma"]            = "nnedi3",
+        ["prescale-luma"]       = "nnedi3",
         ["nnedi3-upload"]       = "shader",
         ["nnedi3-neurons"]      = "64",
         ["nnedi3-window"]       = "8x4",
@@ -101,14 +102,15 @@ vo_opts = {
 
         ["correct-downscaling"] = "yes",
         ["deband"]              = "yes",
-        ["prescale-luma"]            = "superxbr",
+        ["waitvsync"]           = "yes",
+        ["prescale-luma"]       = "superxbr",
         ["prescale-passes"]     = "2",
         ["prescale-downscaling-threshold"] = "1.5",
         
-        ["gamma"]                = "0.9338",
+        ["gamma"]               = "0.9338",
         ["target-prim"]         = "bt.2020",
         ["target-trc"]          = "bt.1886",
-        ["3dlut-size"]        = "256x256x256",
+        ["3dlut-size"]          = "256x256x256",
         ["blend-subtitles"]     = "video",
     },
 
@@ -130,6 +132,7 @@ vo_opts = {
         ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]            = "yes",
+        ["waitvsync"]           = "yes",
         
         ["gamma"]                = "0.9338",
         ["target-prim"]         = "bt.2020",
@@ -148,6 +151,7 @@ vo_opts = {
         ["scaler-resizes-only"] = "yes",
         ["sigmoid-upscaling"]   = "yes",
         ["blend-subtitles"]     = "yes",
+        ["waitvsync"]           = "yes",
 
         ["interpolation"]     = function () return is_high_res(o) and "no" or "yes" end,
         ["blend-subtitles"]     = "yes",
