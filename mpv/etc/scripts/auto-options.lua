@@ -69,7 +69,7 @@ vo_opts = {
         ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]              = "yes",
-        ["waitvsync"]           = "yes",
+      --["waitvsync"]           = "yes",
         ["prescale-passes"]     = "1",
         ["prescale-downscaling-threshold"] = "1.5",
         
@@ -101,7 +101,7 @@ vo_opts = {
         ["blend-subtitles"]     = "no",
 
         ["correct-downscaling"] = "yes",
-        ["deband"]              = "yes",
+      --["waitvsync"]           = "yes",
         ["waitvsync"]           = "yes",
         ["prescale-luma"]       = "superxbr",
         ["prescale-passes"]     = "2",
@@ -132,7 +132,7 @@ vo_opts = {
         ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]            = "yes",
-        ["waitvsync"]           = "yes",
+      --["waitvsync"]           = "yes",
         
         ["gamma"]                = "0.9338",
         ["target-prim"]         = "bt.2020",
@@ -151,7 +151,7 @@ vo_opts = {
         ["scaler-resizes-only"] = "yes",
         ["sigmoid-upscaling"]   = "yes",
         ["blend-subtitles"]     = "yes",
-        ["waitvsync"]           = "yes",
+      --["waitvsync"]           = "yes",
 
         ["interpolation"]     = function () return is_high_res(o) and "no" or "yes" end,
         ["blend-subtitles"]     = "yes",
