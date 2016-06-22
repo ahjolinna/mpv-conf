@@ -25,7 +25,6 @@ local f = require 'auto-options-functions'
 local opts = require 'mp.options'
 
 local o = {
-    uq = "ultra-quality",
     hq = "high-quality",
     mq = "medium-quality",
     lq = "low-quality",
@@ -42,7 +41,6 @@ opts.read_options(o)
 -- Specify a VO for each level
 
 vo = {
-    [o.uq] = "opengl-hq",
     [o.hq] = "opengl-hq",
     [o.mq] = "opengl-hq",
     [o.lq] = "opengl",
@@ -51,41 +49,6 @@ vo = {
 
 -- Specify VO sub-options for different levels
 vo_opts = {
-    [o.uq] = {
-        ["scale"]  = "ewa_lanczossharp",
-        ["cscale"] = "ewa_lanczossoft",
-        ["dscale"] = "mitchell",
-        ["tscale"] = "triangle",
-        ["scale-antiring"]  = "1",
-        ["cscale-antiring"] = "0.9",
-        ["scale-radius"]    = "3",
-
-        ["dither-depth"]        = "auto",
-        ["scaler-resizes-only"] = "yes",
-        ["sigmoid-upscaling"]   = "yes",
-        ["blend-subtitles"]     = "no",
-
-        ["interpolation"]       = "yes",
-        ["interpolation-threshold"] = "0.0001",
-        ["correct-downscaling"] = "yes",
-        ["deband"]              = "yes",
-      --["waitvsync"]           = "yes",
-        ["prescale-passes"]     = "1",
-        ["prescale-downscaling-threshold"] = "1.5",
-        
-        ["prescale-luma"]       = "nnedi3",
-        ["nnedi3-upload"]       = "shader",
-        ["nnedi3-neurons"]      = "64",
-        ["nnedi3-window"]       = "8x4",
-        
-        
-        ["gamma"]                = "0.9338",
-        ["target-prim"]         = "bt.2020",
-        ["target-trc"]          = "bt.1886",
-        ["3dlut-size"]        = "256x256x256",
-        ["blend-subtitles"]     = "video",
-    },
-
     [o.hq] = {
         ["scale"]  = "ewa_lanczossharp",
         ["cscale"] = "ewa_lanczossoft",
@@ -101,7 +64,7 @@ vo_opts = {
         ["blend-subtitles"]     = "no",
 
         ["correct-downscaling"] = "yes",
-      --["waitvsync"]           = "yes",
+        ["waitvsync"]           = "yes",
         ["waitvsync"]           = "yes",
         ["prescale-luma"]       = "superxbr",
         ["prescale-passes"]     = "2",
@@ -132,7 +95,7 @@ vo_opts = {
         ["interpolation-threshold"] = "0.0001",
         ["correct-downscaling"] = "yes",
         ["deband"]            = "yes",
-      --["waitvsync"]           = "yes",
+        ["waitvsync"]           = "yes",
         
         ["gamma"]                = "0.9338",
         ["target-prim"]         = "bt.2020",
@@ -151,7 +114,7 @@ vo_opts = {
         ["scaler-resizes-only"] = "yes",
         ["sigmoid-upscaling"]   = "yes",
         ["blend-subtitles"]     = "yes",
-      --["waitvsync"]           = "yes",
+        ["waitvsync"]           = "yes",
 
         ["interpolation"]     = function () return is_high_res(o) and "no" or "yes" end,
         ["blend-subtitles"]     = "yes",
@@ -162,12 +125,6 @@ vo_opts = {
 -- Specify general mpv options for different levels
 
 options = {
-    [o.uq] = {
-        ["options/vo"] = function () return vo_property_string(o.uq, vo, vo_opts) end,
-        ["options/hwdec"] = "auto",
-        ["options/vd-lavc-threads"] = "16",
-    },
-    
     [o.hq] = {
         ["options/vo"] = function () return vo_property_string(o.hq, vo, vo_opts) end,
         ["options/hwdec"] = "auto",
