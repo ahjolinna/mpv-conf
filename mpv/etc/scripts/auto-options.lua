@@ -66,9 +66,6 @@ vo_opts = {
         ["correct-downscaling"] = "yes",
         ["waitvsync"]           = "yes",
         ["waitvsync"]           = "yes",
-        ["prescale-luma"]       = "superxbr",
-        ["prescale-passes"]     = "2",
-        ["prescale-downscaling-threshold"] = "1.5",
         
         ["gamma"]               = "0.9338",
         ["target-prim"]         = "bt.2020",
