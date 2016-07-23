@@ -67,7 +67,7 @@ there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/I
 `|-o-| ---FUTURE PLANS--- |-o-|`
 ```
 1) make vdpau/vaapi only enabled with the correct hardware/drivers || DONE
-2) make non-free codecs optional || Done
+2) make non-free codecs optional in PKGBUILD || Done
 3) more "automatic" quality settings in the (lua) scripts || semi-DONE
 4) adding laptop & desktop detection it has been added/changed to battery detection || DONE
 5) better documentation when most of these features have been || done
