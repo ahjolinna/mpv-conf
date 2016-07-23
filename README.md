@@ -15,7 +15,6 @@ This is my first version of MPV(-build-git) with some premade conf files, and wi
 
 * You can also use `--script-opts=ao-level=<level>` to force a specific quality level from command line. Upon start will select a level (uq/hq/mq/lq) whose options will then be applied.
 ```
-    uq = ultra-quality
     hq = high-quality
     mq = medium-quality
     lq = low-quality
@@ -67,14 +66,12 @@ there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/I
 
 `|-o-| ---FUTURE PLANS--- |-o-|`
 ```
-1) make vdpau/vaapi only enabled with the correct hardware/drivers ||DONE
-2) make non-free codecs optional
+1) make vdpau/vaapi only enabled with the correct hardware/drivers || DONE
+2) make non-free codecs optional || Done
 3) more "automatic" quality settings in the (lua) scripts || semi-DONE
 4) adding laptop & desktop detection it has been added/changed to battery detection || DONE
-5) support for upscaling for 4K monitors (the 4k upscaling is now on 'ultra-quality'-settings)..|| DONE
-5.1)  make "4k support" automatic by adding monitor resolution detection (detection support is now added) || semi-DONE
-6) better documentation when most of these features have been || done
-7) one thing I would like to do, is to have same video quality setting  what bomi-player uses (video->Quality Preset)...but they are little bit weird...it would be nice if someone could help with that
+5) better documentation when most of these features have been || done
+6) one thing I would like to do, is to have same video quality setting  what bomi-player uses (video->Quality Preset)...but they are little bit weird...it would be nice if someone could help with that
 ```
 `( ∙_∙) ( ∙_∙)>⌐■-■ (⌐■_■)`
 
