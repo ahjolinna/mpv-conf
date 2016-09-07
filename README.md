@@ -57,7 +57,7 @@ SVP provides GPU acceleration and allows to watch FullHD 1080p-video recalculate
 SVP is a proprietary project and its free for linux users but 15$ for win/mac version
 
 
-there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/Interpolation)
+there is more info about frame interpolation tech at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/Interpolation)
 
 ## (MPV) Requirements
 * [`Adobe Source Sans Pro`](http://adobe-fonts.github.io/source-sans-pro/): used in OSD
