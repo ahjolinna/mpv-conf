@@ -13,15 +13,16 @@ This is my first version of MPV(-build-git) with some premade conf files, and wi
 
 * There is 4 different quality settings : uq, hq, mq & lq. MVtools uses medium quality because it's so CPU intensive. There is also the "normal" mpv.desktop file.
 
-* You can also use `--script-opts=ao-level=<level>` to force a specific quality level from command line. Upon start will select a level (uq/hq/mq/lq) whose options will then be applied.
+* You can also use `--script-opts=ao-level=<level>` to force a specific quality level from command line. Upon start will select a level (/hq/svp/mq/lq) whose options will then be applied.
 ```
-    hq = high-quality
-    mq = medium-quality
-    lq = low-quality
+    hq  = high-quality
+    svp = SmoothVideo
+    mq  = medium-quality
+    lq  = low-quality
+    
 ```
-* the plan is to have only 2 premade quality desktop file (max 3), the normal and MVtools. The idea is that uq would be for 4k owners only, lq is "fallback for laptop's and hq is the default one...mq would be for MVtools.
 
-* if someone wants I can make version without the non-free codec support , and/or more lighter/simpler one, and/or stable version (not git)..but I will do that after conf files are in better shape
+* the non-free codecs are now optional, you can disable them in the PKGBUILD easily
 
 ####ytdl info:
 ytdl ("youtube and a like") support  was  added so it mpv will automatically work with without adding the additional '--ytdl' command, aka you only need to add/write mpv <link> nothing else.. nothing more
@@ -51,6 +52,10 @@ if you want to use MVtools you need to install 'vapoursynth-plugin-mvtools' to u
 
     Because Smooth Motion works by using frame blending you may see slight ghost images at the edge of moving objects—but this seems to be rare and dependent on the display you are using, and is definitely preferable to the usual judder from mismatched framerates/refresh rates.
 ```
+##[SVP - SmoothVideo Project](https://www.svp-team.com/wiki/Main_Page)
+SVP provides GPU acceleration and allows to watch FullHD 1080p-video recalculated to 60Hz in real-time using a mid-range CPU and almost any GPU hardware.
+SVP is a proprietary project and its free for linux users but 15$ for win/mac version
+
 
 there is more info at mpv's [wiki page](https://github.com/mpv-player/mpv/wiki/Interpolation)
 
