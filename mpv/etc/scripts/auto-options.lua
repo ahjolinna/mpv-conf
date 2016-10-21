@@ -28,6 +28,7 @@ local o = {
     hq = "high-quality",
     mq = "medium-quality",
     svp = "SmoothVideo",
+    cuda = "NVDEC",
     lq = "low-quality",
     highres_threshold = "1920x1080@60.00hz",
     force_low_res = false,
@@ -43,8 +44,9 @@ opts.read_options(o)
 
 vo = {
     [o.hq] = "opengl-hq",
-    [o.mq] = "opengl-hq",
+    [o.cuda] =  "opengl-hq",
     [o.svp] =  "opengl-hq",
+    [o.mq] = "opengl-hq",
     [o.lq] = "opengl",
 }
 
@@ -60,11 +62,12 @@ vo_opts = {
         ["cscale-antiring"] = "0.9",
         ["scale-radius"]    = "3",
 
+        ["interpolation"]     =  function () return is_high_res(o) and "no" or "yes" end,
+        ["interpolation-threshold"] = "0.0001",
+        
         ["dither-depth"]        = "auto",
         ["scaler-resizes-only"] = "yes",
         ["sigmoid-upscaling"]   = "yes",
-        ["blend-subtitles"]     = "no",
-
         ["correct-downscaling"] = "yes",
         ["waitvsync"]           = "yes",
         
@@ -77,6 +80,31 @@ vo_opts = {
         ["icc-profile"]               = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
     },
 
+    [o.cuda] = {  
+        ["scale"]  = "ewa_lanczossharp",
+        ["cscale"] = "ewa_lanczossoft",
+        ["dscale"] = "mitchell",
+        ["tscale"] = "triangle",
+        ["scale-antiring"]  = "0.8",
+        ["cscale-antiring"] = "0.9",
+        
+        ["interpolation"]     =  function () return is_high_res(o) and "no" or "yes" end,
+        ["interpolation-threshold"] = "0.0001",
+        
+        ["dither-depth"]        = "auto",
+        ["target-prim"]         = "bt.709",
+        ["correct-downscaling"] = "yes",
+        ["waitvsync"]           = "yes",
+        ["vd-lavc-o=deint"] = "adaptive",
+        
+        ["gamma"]               = "0.9338",
+        ["target-prim"]         = "bt.2020",
+        ["target-trc"]          = "bt.1886",
+        ["3dlut-size"]          = "256x256x256",
+        ["blend-subtitles"]     = "video",
+
+    },
+    
   [o.svp] = {  
         ["scale"]  = "ewa_lanczossharp",
         ["cscale"] = "ewa_lanczossoft",
@@ -148,7 +176,13 @@ options = {
         ["options/hwdec"] = "auto",
         ["options/vd-lavc-threads"] = "16",
         ["options/vf-add"] = "vdpaupp=sharpen=0.10:denoise=0.10:deint=yes:deint-mode=temporal-spatial:pullup:hqscaling=1",
-       
+     
+      [o.cuda] = {
+     ["options/vo"] = function () return vo_property_string(o.mq, vo, vo_opts) end,
+        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
+        ["options/hwdec"] = "cuda",
+    },
+        
     },
   [o.svp] = {
      ["options/vo"] = function () return vo_property_string(o.mq, vo, vo_opts) end,
