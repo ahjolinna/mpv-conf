@@ -6,7 +6,7 @@
 ![mpv-conf Preview](http://i.imgur.com/5B881oX.png)
 
 #### Summary : 
-This is my first version of MPV(-build-git) with some premade conf files, and with MVtools support ( Motion Interpolation aka smooth motion).
+This is my own MPV premade conf files, what I try make is semi-automatic script to define what settings should be used
 
 #### Basic info:
 * ytdl works out of the box, there is A LOT "keyboard bindings", it should support every codec what mpv and ffmpeg can/has (even non-free codecs)
@@ -15,10 +15,11 @@ This is my first version of MPV(-build-git) with some premade conf files, and wi
 
 * You can also use `--script-opts=ao-level=<level>` to force a specific quality level from command line. Upon start will select a level (/hq/svp/mq/lq) whose options will then be applied.
 ```
-    hq  = high-quality
-    svp = SmoothVideo
-    mq  = medium-quality
-    lq  = low-quality
+    hq   = high-quality
+    svp  = SmoothVideo
+    cuda = NVDEC
+    mq   = medium-quality
+    lq   = low-quality
     
 ```
 
