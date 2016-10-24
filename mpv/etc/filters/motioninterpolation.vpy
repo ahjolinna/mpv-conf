@@ -11,11 +11,11 @@ import vapoursynth
 core = vapoursynth.get_core()
 # ref: http://avisynth.org.ru/mvtools/mvtools2.html#functions
 # default is 400, less means interpolation will only happen when it will work well
-ignore_threshold=140
+ignore_threshold=100
 # if n% of blocks change more than threshold then don't interpolate at all (default is 51%)
 scene_change_percentage=15
-
-dst_fps = display_fps
+#dst_fps = display_fps # <- FPS depends on the actual frequency of the monitor. Сomment out it and uncomment "dst_fps = 60" if you want stable 60 FPS.
+dst_fps = 60 # <- Сomment out it and uncomment "dst_fps = display_fps" if you want the frequency that corresponds to your monitor.
 # Interpolating to fps higher than 60 is too CPU-expensive, smoothmotion can handle the rest.
 # while (dst_fps > 60):
 #    dst_fps /= 2
@@ -42,21 +42,27 @@ if not (mpix > 2.5 or clip.fps_num/clip.fps_den > 59):
         'search': 3,
         'truemotion': True,
         #'chrome': True,
-        #'blksize':16,
-        #'searchparam':1
+        #'blksize':16,# <- Default settings
+        #'searchparam':1# <- Default settings
+        #'blksize':32,   # <- Uncomment, if you want to increase performance, when used FlowFPS
+        #'searchparam':1 # <- Uncomment, if you want to increase performance, when used FlowFPS
+        'blksize':32,   # <- Uncomment, if you want to reduce the number of artifacts
+        'searchparam':60 # <- Uncomment, if you want to reduce the number of artifacts
     }
     blockParams = {
         'thscd1': ignore_threshold,
         'thscd2': int(scene_change_percentage*255/100),
-        'mode': 3,
+        'mode': 3,  # <- Сomment out, to use FlowFPS
     }
 
     if mpix > 1.5:
         # can't handle these on Full HD with Intel i5-2500k
         # see the description of these parameters in http://avisynth.org.ru/mvtools/mvtools2.html#functions
         analParams['search'] = 0
-        blockParams['mode'] = 0
-        quality = 'medium'
+        #blockParams['mode'] = 0
+        #quality = 'medium'  # <- Default settings
+        quality = 'high'   # <- Uncomment, for force the highest settings
+        
     else:
         quality = 'high'
 
@@ -67,8 +73,9 @@ if not (mpix > 2.5 or clip.fps_num/clip.fps_den > 59):
     
     sup  = core.mv.Super(clip, pel=2)
     bvec = core.mv.Analyse(sup, isb=True, **analParams)
-    fvec = core.mv.Analyse(sup, isb=False, **analParams)
-    clip = core.mv.BlockFPS(clip, sup, bvec, fvec, 
+    fvec = core.mv.Analyse(sup, isb=False, **analParams) 
+    #clip = core.mv.FlowFPS(clip, sup, bvec, fvec,   # <- Uncomment, to use FlowFPS
+    clip = core.mv.BlockFPS(clip, sup, bvec, fvec,   # <- Default settings
             num=dst_fps_num, den=dst_fps_den, 
             **blockParams)
 
