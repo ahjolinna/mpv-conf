@@ -87,7 +87,6 @@ local options = {
         ["target-prim"]         = "bt.709",
         ["correct-downscaling"] = "yes",
         ["opengl-waitvsync"]           = "yes",
-        ["vd-lavc-o=deint"] = "adaptive",        
         ["3dlut-size"]          = "256x256x256",
         ["blend-subtitles"]     = "video",                
         ["hwdec"] = "cuda",
