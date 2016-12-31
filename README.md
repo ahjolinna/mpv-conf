@@ -8,10 +8,10 @@
 #### Summary : 
 This is my own MPV premade conf files, what I try make is semi-automatic script to define what settings should be used
 
-#### Basic info:
-* ytdl works out of the box, there is A LOT "keyboard bindings", it should support every codec what mpv and ffmpeg can/has (even non-free codecs)
+#### Basic features:
+* ytdl works out of the box, there is A LOT "keyboard bindings", it should support every codec what mpv and ffmpeg has to offer (even non-free codecs)
 
-* There is 4 different quality settings : uq, hq, mq & lq. MVtools uses medium quality because it's so CPU intensive. There is also the "normal" mpv.desktop file.
+* few different premade quality settings : hq, cuvid(/cuda), mq, lq & SVP/MVtools (uses medium quality because it's so CPU intensive). There is also the "normal" mpv.desktop file.
 
 * You can also use `--script-opts=ao-level=<level>` to force a specific quality level from command line. Upon start will select a level (/hq/svp/mq/lq) whose options will then be applied.
 ```
@@ -30,7 +30,7 @@ ytdl ("youtube and a like") support  was  added so it mpv will automatically wor
 ```
 Example: mpv https://vimeo.com/148177620
 ```
-Twitch live streaming info: If you want to watch live twich.tv video streams you need to install 'livestreamer' app, and to watch them with MPV you need to use this following command :
+Twitch live streaming info: If you want to watch some live twich.tv video streams you need to install 'livestreamer' app, and to watch them with MPV you need to use this following command :
 ```
 livestreamer -p mpv <twitch link> <quality> --player-continuous-http
 ``` 
