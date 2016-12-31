@@ -1,4 +1,4 @@
-#Ahjolinna's MPV conf build (⌐■_■) [broken with v0.23 mpv]
+#Ahjolinna's MPV conf build (⌐■_■) [broken with v0.23]
 
 
 ---input wanted
