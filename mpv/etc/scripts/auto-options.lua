@@ -71,7 +71,7 @@ vo_opts = {
     ["correct-downscaling"] = "yes",
     ["opengl-waitvsync"]    = "yes",
 
-    ["gamma"]               = "93",
+   -- ["gamma"]               = "93",
     ["target-prim"]         = "bt.2020",
     ["target-trc"]          = "bt.1886",
     ["icc-3dlut-size"]      = "256x256x256",
@@ -97,7 +97,7 @@ vo_opts = {
     ["opengl-waitvsync"]    = "yes",
     ["vd-lavc-o=deint"]     = "adaptive",
 
-    ["gamma"]               = "93",
+   -- ["gamma"]               = "93",
     ["target-prim"]         = "bt.2020",
     ["target-trc"]          = "bt.1886",
     ["icc-3dlut-size"]      = "256x256x256",
@@ -138,7 +138,7 @@ vo_opts = {
     ["deband"]                  = "yes",
     ["opengl-waitvsync"]        = "yes",
 
-    ["gamma"]                   = "93",
+    --["gamma"]                   = "93",
     ["target-prim"]             = "bt.2020",
     ["target-trc"]              = "bt.1886",
     ["icc-3dlut-size"]          = "256x256x256",
