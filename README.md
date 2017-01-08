@@ -1,6 +1,6 @@
 #Ahjolinna's MPV conf build (⌐■_■) 
 
-[almost working with v0.23+]
+[is now working with v0.23+]
 ---input wanted
 
 ![mpv-conf Preview](http://i.imgur.com/5B881oX.png)
