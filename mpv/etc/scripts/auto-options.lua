@@ -18,24 +18,24 @@
 
 -- Don't do anything when mpv was called with an explicitly passed --vo option
 if mp.get_property_bool("option-info/vo/set-from-commandline") then
-    return
+  return
 end
 
 local f = require 'auto-options-functions'
 local opts = require 'mp.options'
 
 local o = {
-    hq = "high-quality",
-    mq = "medium-quality",
-    svp = "SmoothVideo",
-    cuda = "NVDEC",
-    lq = "low-quality",
-    highres_threshold = "1920x1080@60.00hz",
-    force_low_res = false,
-    verbose = true,
-    duration = 2,
-    duration_err_mult = 2,
-    
+  hq = "high-quality",
+  mq = "medium-quality",
+  svp = "SmoothVideo",
+  cuda = "NVDEC",
+  lq = "low-quality",
+  highres_threshold = "1920x1080@60.00hz",
+  force_low_res = false,
+  verbose = true,
+  duration = 2,
+  duration_err_mult = 2,
+
 }
 opts.read_options(o)
 
@@ -43,193 +43,184 @@ opts.read_options(o)
 -- Specify a VO for each level
 
 vo = {
-    [o.hq] = "opengl-hq",
-    [o.cuda] =  "opengl-hq",
-    [o.svp] =  "opengl-hq",
-    [o.mq] = "opengl-hq",
-    [o.lq] = "opengl",
+  [o.hq]    = "opengl-hq",
+  [o.cuda]  =  "opengl-hq",
+  [o.svp]   =  "opengl-hq",
+  [o.mq]    = "opengl-hq",
+  [o.lq]    = "opengl",
 }
 
 
 -- Specify VO sub-options for different levels
 vo_opts = {
-    [o.hq] = {
-        ["scale"]  = "ewa_lanczossharp",
-        ["cscale"] = "ewa_lanczossoft",
-        ["dscale"] = "mitchell",
-        ["tscale"] = "triangle",
-        ["scale-antiring"] = "0.8",
-        ["cscale-antiring"] = "0.9",
-        ["scale-radius"]    = "3",
+  [o.hq] = {
+    ["scale"]  = "ewa_lanczossharp",
+    ["cscale"] = "ewa_lanczossoft",
+    ["dscale"] = "mitchell",
+    ["tscale"] = "triangle",
+    ["scale-antiring"] = "0.8",
+    ["cscale-antiring"] = "0.9",
+    ["scale-radius"]    = "3",
 
-        ["interpolation"]     =  function () return is_high_res(o) and "no" or "yes" end,
-        ["interpolation-threshold"] = "0.0001",
-        
-        ["dither-depth"]        = "auto",
-        ["scaler-resizes-only"] = "yes",
-        ["sigmoid-upscaling"]   = "yes",
-        ["correct-downscaling"] = "yes",
-        ["waitvsync"]           = "yes",
-        
-        ["gamma"]               = "0.9338",
-        ["target-prim"]         = "bt.2020",
-        ["target-trc"]          = "bt.1886",
-        ["3dlut-size"]          = "256x256x256",
-        ["blend-subtitles"]     = "video",
-        ["icc-contrast"]            = "2000",
-        ["icc-profile"]               = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
-    },
+    ["interpolation"]     =  function () return is_high_res(o) and "no" or "yes" end,
+    ["interpolation-threshold"] = "0.0001",
 
-    [o.cuda] = {  
-        ["scale"]  = "ewa_lanczossharp",
-        ["cscale"] = "ewa_lanczossoft",
-        ["dscale"] = "mitchell",
-        ["tscale"] = "triangle",
-        ["scale-antiring"]  = "0.8",
-        ["cscale-antiring"] = "0.9",
-        
-        ["interpolation"]     =  function () return is_high_res(o) and "no" or "yes" end,
-        ["interpolation-threshold"] = "0.0001",
-        
-        ["dither-depth"]        = "auto",
-        ["target-prim"]         = "bt.709",
-        ["correct-downscaling"] = "yes",
-        ["waitvsync"]           = "yes",
-        ["vd-lavc-o=deint"] = "adaptive",
-        
-        ["gamma"]               = "0.9338",
-        ["target-prim"]         = "bt.2020",
-        ["target-trc"]          = "bt.1886",
-        ["3dlut-size"]          = "256x256x256",
-        ["blend-subtitles"]     = "video",
+    ["dither-depth"]        = "auto",
+    ["scaler-resizes-only"] = "yes",
+    ["sigmoid-upscaling"]   = "yes",
+    ["correct-downscaling"] = "yes",
+    ["opengl-waitvsync"]    = "yes",
 
-    },
-    
-  [o.svp] = {  
-        ["scale"]  = "ewa_lanczossharp",
-        ["cscale"] = "ewa_lanczossoft",
-        ["dscale"] = "mitchell",
-        ["tscale"] = "triangle",
-        ["scale-antiring"]  = "0.8",
-        ["cscale-antiring"] = "0.9",
-        
-        ["dither-depth"]        = "auto",
-        ["target-prim"]         = "bt.709",
-        ["correct-downscaling"] = "yes",
-        ["input-ipc-server"]  =   "/tmp/mpvpipe",
-    },
-    
-    [o.mq] = {
-        ["scale"]  = "spline36",
-        ["cscale"] = "spline36",
-        ["dscale"] = "mitchell",
-        ["tscale"] = "triangle",
-        ["scale-antiring"]  = "0.8",
-        ["cscale-antiring"] = "0.9",
-        ["scale-radius"]    = "3",
+    ["gamma"]               = "0.9338",
+    ["target-prim"]         = "bt.2020",
+    ["target-trc"]          = "bt.1886",
+    ["3dlut-size"]          = "256x256x256",
+    ["blend-subtitles"]     = "video",
+    ["icc-contrast"]        = "2000",
+    ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
+  },
 
-        ["dither-depth"]        = "auto",
-        ["scaler-resizes-only"] = "yes",
-        ["sigmoid-upscaling"]   = "yes",
+  [o.cuda] = {
+    ["scale"]               = "ewa_lanczossharp",
+    ["cscale"]              = "ewa_lanczossoft",
+    ["dscale"]              = "mitchell",
+    ["tscale"]              = "triangle",
+    ["scale-antiring"]      = "0.8",
+    ["cscale-antiring"]     = "0.9",
 
-        ["interpolation"]     =  function () return is_high_res(o) and "no" or "yes" end,
-        ["interpolation-threshold"] = "0.0001",
-        ["correct-downscaling"] = "yes",
-        ["deband"]            = "yes",
-        ["waitvsync"]           = "yes",
-        
-        ["gamma"]                = "0.9338",
-        ["target-prim"]         = "bt.2020",
-        ["target-trc"]          = "bt.1886",
-        ["3dlut-size"]        = "256x256x256",
-        ["blend-subtitles"]     = "yes",
-        ["icc-contrast"]            = "2000",
-        ["icc-profile"]               = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
-    },
+    ["interpolation"]       =  function () return is_high_res(o) and "no" or "yes" end,
+    ["interpolation-threshold"] = "0.0001",
 
-    [o.lq] = {
-        ["scale"]  = "spline36",
-        ["dscale"] = "mitchell",
-        ["tscale"] = "triangle",
+    ["dither-depth"]        = "auto",
+    ["target-prim"]         = "bt.709",
+    ["correct-downscaling"] = "yes",
+    ["opengl-waitvsync"]    = "yes",
+    ["vd-lavc-o=deint"]     = "adaptive",
 
-        ["dither-depth"]        = "auto",
-        ["target-prim"]         = "bt.709",
-        ["scaler-resizes-only"] = "yes",
-        ["sigmoid-upscaling"]   = "yes",
-        ["blend-subtitles"]     = "yes",
-        ["waitvsync"]           = "yes",
+    ["gamma"]               = "0.9338",
+    ["target-prim"]         = "bt.2020",
+    ["target-trc"]          = "bt.1886",
+    ["3dlut-size"]          = "256x256x256",
+    ["blend-subtitles"]     = "video",
 
-        ["interpolation"]     = function () return is_high_res(o) and "no" or "yes" end,
-        ["blend-subtitles"]     = "yes",
-        ["icc-contrast"]            = "2000",
-        ["icc-profile"]               = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
-    },
+  },
+
+  [o.svp] = {
+    ["scale"]  = "ewa_lanczossharp",
+    ["cscale"] = "ewa_lanczossoft",
+    ["dscale"] = "mitchell",
+    ["tscale"] = "triangle",
+    ["scale-antiring"]  = "0.8",
+    ["cscale-antiring"] = "0.9",
+
+    ["dither-depth"]        = "auto",
+    ["target-prim"]         = "bt.709",
+    ["correct-downscaling"] = "yes",
+    ["input-ipc-server"]    =   "/tmp/mpvpipe",
+  },
+
+  [o.mq] = {
+    ["scale"]                   = "spline36",
+    ["cscale"]                  = "spline36",
+    ["dscale"]                  = "mitchell",
+    ["tscale"]                  = "triangle",
+    ["scale-antiring"]          = "0.8",
+    ["cscale-antiring"]         = "0.9",
+    ["scale-radius"]            = "3",
+
+    ["dither-depth"]            = "auto",
+    ["scaler-resizes-only"]     = "yes",
+    ["sigmoid-upscaling"]       = "yes",
+
+    ["interpolation"]           =  function () return is_high_res(o) and "no" or "yes" end,
+    ["interpolation-threshold"] = "0.0001",
+    ["correct-downscaling"]     = "yes",
+    ["deband"]                  = "yes",
+    ["opengl-waitvsync"]        = "yes",
+
+    ["gamma"]                   = "0.9338",
+    ["target-prim"]             = "bt.2020",
+    ["target-trc"]              = "bt.1886",
+    ["3dlut-size"]              = "256x256x256",
+    ["blend-subtitles"]         = "yes",
+    ["icc-contrast"]            = "2000",
+    ["icc-profile"]             = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
+  },
+
+  [o.lq] = {
+    ["scale"]  = "spline36",
+    ["dscale"] = "mitchell",
+    ["tscale"] = "triangle",
+
+    ["dither-depth"]        = "auto",
+    ["target-prim"]         = "bt.709",
+    ["scaler-resizes-only"] = "yes",
+    ["sigmoid-upscaling"]   = "yes",
+    ["blend-subtitles"]     = "yes",
+    ["opengl-waitvsync"]    = "yes",
+
+    ["interpolation"]       = function () return is_high_res(o) and "no" or "yes" end,
+    ["blend-subtitles"]     = "yes",
+    ["icc-contrast"]        = "2000",
+    ["icc-profile"]         = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
+  },
 }
 
 
 -- Specify general mpv options for different levels
 
 options = {
-    [o.hq] = {
-        ["options/vo"] = function () return vo_property_string(o.hq, vo, vo_opts) end,
-        ["options/hwdec"] = "auto",
-        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
-        ["options/vd-lavc-threads"] = "16",
-        ["options/vf-add"] = "vdpaupp=sharpen=0.05:denoise=0.05:deint=no:deint-mode=temporal-spatial:hqscaling=1",
-     
-      [o.cuda] = {
-     ["options/vo"] = function () return vo_property_string(o.mq, vo, vo_opts) end,
-        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
-        ["options/hwdec"] = "cuda",
-    },
-        
-    },
+  [o.hq] = {
+    ["options/vo"]              = vo_opts[o.hq],
+    ["options/hwdec"]           = "auto",
+    ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
+    ["options/vd-lavc-threads"] = "16",
+    ["options/vf-add"]          = "vdpaupp=sharpen=0.05:denoise=0.05:deint=no:deint-mode=temporal-spatial:hqscaling=1"
+  },
+  [o.cuda] = {
+    ["options/vo"]              = vo_opts[o.mq],
+    ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
+    ["options/hwdec"]           = "cuda",
+  },
   [o.svp] = {
-     ["options/vo"] = function () return vo_property_string(o.mq, vo, vo_opts) end,
-        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
-        ["options/hwdec"] = "no",
-    },
-    [o.mq] = {
-        ["options/vo"] = function () return vo_property_string(o.mq, vo, vo_opts) end,
-        ["options/video-sync"] = function () return is_high_res(o) and "audio" or "display-resample" end,
-        ["options/hwdec"] = "auto",
-    },
+    ["options/vo"]              = vo_opts[o.mq],
+    ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
+    ["options/hwdec"]           = "no",
+  },
+  [o.mq] = {
+    ["options/vo"]              = vo_opts[o.mq],
+    ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
+    ["options/hwdec"]           = "auto",
+  },
 
-    [o.lq] = {
-        ["options/vo"] = function () return vo_property_string(o.lq, vo, vo_opts) end,
-        ["options/video-sync"] = "audio",
-        ["options/hwdec"] = "auto",
-    },
+  [o.lq] = {
+    ["options/vo"]              = vo_opts[o.lq],
+    ["options/video-sync"]      = "audio",
+    ["options/hwdec"]           = "auto",
+  },
 }
 
 
 -- Print status information to VO window and terminal
 
 mp.observe_property("vo-configured", "bool",
-                    function (name, value) print_status(name, value, o) end)
-
+function (name, value) print_status(name, value, o) end)
 
 -- Determined level and set the appropriate options
 
 function main()
-    o.force_low_res = mp.get_opt("ao-flr")
-    o.level = determine_level(o, vo, vo_opts, options)
-    o.err_occ = false
-    for k, v in pairs(options[o.level]) do
-        if type(v) == "function" then
-            v = v()
-        end
-        print(k)
-        print(v)
-        success, err = mp.set_property(k, v)
-        o.err_occ = o.err_occ or not (o.err_occ or success)
-        if success and o.verbose then
-            print("Set '" .. k .. "' to '" .. v .. "'")
-        elseif o.verbose then
-            print("Failed to set '" .. k .. "' to '" .. v .. "'")
-            print(err)
-        end
+  o.force_low_res = mp.get_opt("ao-flr")
+  o.level = determine_level(o, vo, vo_opts, options)
+  o.err_occ = false
+  for k, v in pairs(options[o.level]) do
+    if type(v) == "table" then
+     for property, value in pairs(v) do
+        set_property(property, value, o)
+     end
+    else
+      set_property(k, v, o)
     end
+  end
 end
 
 main()
