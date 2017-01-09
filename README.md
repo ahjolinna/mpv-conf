@@ -1,12 +1,12 @@
 #Ahjolinna's MPV conf build (⌐■_■) 
 
-[is now working with v0.23+]
+[compatible with MPV 0.23+]
 ---input wanted
 
 ![mpv-conf Preview](http://i.imgur.com/5B881oX.png)
 
 #### Summary : 
-This is my own MPV premade conf files, what I try make is semi-automatic script to define what settings should be used
+This is my own MPV premade conf files, with semi-automatic script to define what settings should be used
 
 #### Basic features:
 * ytdl works out of the box, there is A LOT "keyboard bindings", it should support every codec what mpv and ffmpeg has to offer (even non-free codecs)
@@ -66,18 +66,20 @@ there is more info about frame interpolation tech at mpv's [wiki page](https://g
 * `livestreamer`: to watch live video streams (twitch.tv)
 * `vapoursynth`: for some script support like MVtools '--enable-vapoursynth' needs to be added in mpv build
 * `vapoursynth-plugin-mvtools`: Realtime motion interpolating playback in mpv
+* [`SVP4`](https://www.svp-team.com/) support, a "proprietary version of MVtools" that is way better
 * `acpitool`: for "battery mode" detection
 * `inxi`: HIDPI-detection
 * `libvdpau or libva`: for hardware-acceleration support
+* `CUDA/CUVID` support for nvidia users
 
 `|-o-| ---FUTURE PLANS--- |-o-|`
 ```
-1) make vdpau/vaapi only enabled with the correct hardware/drivers || DONE
+1) use "full version" of MPV and ffmpeg (more or less) in PKGBUILD || DONE
 2) make non-free codecs optional in PKGBUILD || Done
 3) more "automatic" quality settings in the (lua) scripts || semi-DONE
 4) adding laptop & desktop detection it has been added/changed to battery detection || DONE
-5) better documentation when most of these features have been || done
-6) one thing I would like to do, is to have same video quality setting  what bomi-player uses (video->Quality Preset)...but they are little bit weird...it would be nice if someone could help with that
+5) better documentation when most of these features have been || semi-done
+6) have same video quality setting what bomi-player uses (video->Quality Preset) || help-needed
 ```
 `( ∙_∙) ( ∙_∙)>⌐■-■ (⌐■_■)`
 
