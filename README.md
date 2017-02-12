@@ -5,7 +5,7 @@
 
 ![mpv-conf Preview](http://i.imgur.com/5B881oX.png)
 
-[![Discord](https://discordapp.com/api/guilds/215902295303520256/widget.png)](https://discord.gg/2E5WeVR)<br>
+[![Discord](https://discordapp.com/api/guilds/111176699315556352/widget.png)](https://discord.gg/2E5WeVR)<br>
 
 #### Summary : 
 This is my own MPV premade conf files, with semi-automatic script to define what settings should be used
