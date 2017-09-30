@@ -28,7 +28,7 @@ local o = {
   hq = "high-quality",
   mq = "medium-quality",
   svp = "SmoothVideo",
-  cuda = "NVDEC",
+  cuda = "cuvid",
   lq = "low-quality",
   highres_threshold = "1920x1080@60.00hz",
   force_low_res = false,
@@ -57,7 +57,7 @@ vo_opts = {
     ["scale"]  = "ewa_lanczossharp",
     ["cscale"] = "ewa_lanczossoft",
     ["dscale"] = "mitchell",
-    ["tscale"] = "triangle",
+    ["tscale"] = "oversample",
     ["scale-antiring"] = "0.8",
     ["cscale-antiring"] = "0.9",
     ["scale-radius"]    = "3",
@@ -68,6 +68,7 @@ vo_opts = {
     ["dither-depth"]        = "auto",
     ["scaler-resizes-only"] = "yes",
     ["sigmoid-upscaling"]   = "yes",
+    ["linear-scaling"]      = "yes",
     ["correct-downscaling"] = "yes",
     ["opengl-waitvsync"]    = "yes",
 
@@ -83,7 +84,7 @@ vo_opts = {
     ["scale"]               = "ewa_lanczossharp",
     ["cscale"]              = "ewa_lanczossoft",
     ["dscale"]              = "mitchell",
-    ["tscale"]              = "triangle",
+    ["tscale"]              = "oversample",
     ["scale-antiring"]      = "0.8",
     ["cscale-antiring"]     = "0.9",
 
@@ -114,14 +115,14 @@ vo_opts = {
     ["dither-depth"]        = "auto",
     ["target-prim"]         = "bt.709",
     ["correct-downscaling"] = "yes",
-    ["input-ipc-server"]    =   "/tmp/mpvpipe",
+    ["input-ipc-server"]    =   "/tmp/mpvsocket",
   },
 
   [o.mq] = {
     ["scale"]                   = "spline36",
     ["cscale"]                  = "spline36",
     ["dscale"]                  = "mitchell",
-    ["tscale"]                  = "triangle",
+    ["tscale"]                  = "oversample",
     ["scale-antiring"]          = "0.8",
     ["cscale-antiring"]         = "0.9",
     ["scale-radius"]            = "3",
@@ -147,7 +148,7 @@ vo_opts = {
   [o.lq] = {
     ["scale"]  = "spline36",
     ["dscale"] = "mitchell",
-    ["tscale"] = "triangle",
+    ["tscale"] = "oversample",
 
     ["dither-depth"]        = "auto",
     ["target-prim"]         = "bt.709",
@@ -169,31 +170,31 @@ vo_opts = {
 options = {
   [o.hq] = {
     ["options/vo"]              = vo_opts[o.hq],
-    ["options/hwdec"]           = "auto",
+    ["options/hwdec"]           = "auto-copy",
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
     ["options/vd-lavc-threads"] = "16",
-    ["options/vf-add"]          = "vdpaupp=sharpen=0.05:denoise=0.05:deint=no:deint-mode=temporal-spatial:hqscaling=1",
+    ["options/vf"]          = "vdpaupp=sharpen=0.05:denoise=0.05:deint=no:deint-mode=temporal-spatial:hqscaling=1",
   },
   [o.cuda] = {
     ["options/vo"]              = vo_opts[o.mq],
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
-    ["options/hwdec"]           = "cuda",
+    ["options/hwdec"]           = "cuda-copy",
   },
   [o.svp] = {
     ["options/vo"]              = vo_opts[o.mq],
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
-    ["options/hwdec"]           = "no",
+    ["options/hwdec"]           = "auto-copy",
   },
   [o.mq] = {
     ["options/vo"]              = vo_opts[o.mq],
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
-    ["options/hwdec"]           = "auto",
+    ["options/hwdec"]           = "auto-copy",
   },
 
   [o.lq] = {
     ["options/vo"]              = vo_opts[o.lq],
     ["options/video-sync"]      = "audio",
-    ["options/hwdec"]           = "auto",
+    ["options/hwdec"]           = "auto-copy",
   },
 }
 
