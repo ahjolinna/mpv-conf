@@ -18,9 +18,11 @@ function determine_level(o, vo, vo_opts, options)
 
   --Call an function determining whether you are using battery or not if so...
   -- Go down to lq when we are on battery
-  sp_ret = exec({"/usr/bin/acpitool", "-b", "| grep AC adapter",})
-  if sp_ret == "<not available>.\n" then
-    level = o.lq
+ sp_ret =  exec({"/usr/bin/acpi", "-b",})
+if sp_ret ~="on-line" then
+    level = o.hq
+else
+level = o.lq
   end
   return level
 end
