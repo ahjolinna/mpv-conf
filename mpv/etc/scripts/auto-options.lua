@@ -68,7 +68,6 @@ vo_opts = {
     ["dither-depth"]            = "auto",
     ["scaler-resizes-only"]     = "yes",
     ["sigmoid-upscaling"]       = "yes",
-    ["linear-scaling"]          = "yes",
     ["correct-downscaling"]     = "yes",
     ["opengl-waitvsync"]        = "yes",
 
@@ -78,6 +77,7 @@ vo_opts = {
     ["blend-subtitles"]         = "video",
     ["icc-contrast"]            = "2000",
     ["icc-profile"]             = "/usr/share/color/icc/BT.709_Profiles/BT.709.icc",
+    ["spirv-compiler"]          = "auto",
   },
 
   [o.cuda] = {
@@ -101,6 +101,9 @@ vo_opts = {
     ["target-trc"]              = "bt.1886",
     ["icc-3dlut-size"]          = "256x256x256",
     ["blend-subtitles"]         = "video",
+    ["spirv-compiler"]          = "nvidia",
+  --["vulkan-swap-mode"]        = "mailbox",
+  --["vulkan-queue-count"]      = "2",
 
   },
 
@@ -115,7 +118,7 @@ vo_opts = {
     ["dither-depth"]            = "auto",
     ["target-prim"]             = "bt.709",
     ["correct-downscaling"]     = "yes",
-    ["input-ipc-server"]        =   "/tmp/mpvsocket",
+    ["input-ipc-server"]        = "/tmp/mpvsocket",
   },
 
   [o.mq] = {
@@ -172,29 +175,37 @@ options = {
     ["options/vo"]              = vo_opts[o.hq],
     ["options/hwdec"]           = "auto-copy",
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
-    ["options/vd-lavc-threads"] = "16",
-    ["options/vf"]          = "vdpaupp=sharpen=0.05:denoise=0.05:deint=no:deint-mode=temporal-spatial:hqscaling=1",
+    ["options/vd-lavc-threads"] = "32",
+    ["options/vf"]              = "vdpaupp=sharpen=0.10:denoise=0.10:deint=yes:deint-mode=temporal-spatial:pullup:hqscaling=1",
+    ["options/gpu-api"]         = "auto",
   },
   [o.cuda] = {
     ["options/vo"]              = vo_opts[o.mq],
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
+    ["options/vd-lavc-threads"] = "32",
     ["options/hwdec"]           = "cuda-copy",
+    ["options/gpu-api"]         = "auto",
   },
   [o.svp] = {
     ["options/vo"]              = vo_opts[o.mq],
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
+    ["options/vd-lavc-threads"] = "32",
     ["options/hwdec"]           = "auto-copy",
+    ["options/gpu-api"]         = "opengl",
   },
   [o.mq] = {
     ["options/vo"]              = vo_opts[o.mq],
     ["options/video-sync"]      = function () return is_high_res(o) and "audio" or "display-resample" end,
+    ["options/vd-lavc-threads"] = "16",
     ["options/hwdec"]           = "auto-copy",
+    ["options/gpu-api"]         = "opengl",
   },
 
   [o.lq] = {
     ["options/vo"]              = vo_opts[o.lq],
     ["options/video-sync"]      = "audio",
     ["options/hwdec"]           = "auto-copy",
+    ["options/gpu-api"]         = "opengl",
   },
 }
 
