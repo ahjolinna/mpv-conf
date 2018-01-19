@@ -32,7 +32,7 @@ ytdl ("youtube and a like") support  was  added so it mpv will automatically wor
 ```
 Example: mpv https://vimeo.com/148177620
 ```
-Twitch live streaming info: If you want to watch some live twich.tv video streams you need to install ['streamlink'](https://streamlink.github.io/) (livestreamer fork) app, and to watch them with MPV you need to use this following command :
+Twitch live streaming info: If you want to watch some live twich.tv video streams you need to install 'streamlink' (livestreamer fork) app, and to watch them with MPV you need to use this following command :
 ```
 streamlink -p mpv <twitch link> <quality> --player-continuous-http
 ``` 
@@ -65,12 +65,12 @@ there is more info about frame interpolation tech at mpv's [wiki page](https://g
 ## (MPV) Requirements
 * [`Adobe Source Sans Pro`](http://adobe-fonts.github.io/source-sans-pro/): used in OSD
 * `youtube-dl`: youtube videos and a like
-* `livestreamer`: to watch live video streams (twitch.tv)
-* `vapoursynth`: for some script support like MVtools '--enable-vapoursynth' needs to be added in mpv build
-* `vapoursynth-plugin-mvtools`: Realtime motion interpolating playback in mpv
+* [`streamlink`](https://streamlink.github.io/): to watch live video streams (like twitch.tv)
+* [`vapoursynth`](http://www.vapoursynth.com/): for some script support like MVtools '--enable-vapoursynth' needs to be added in mpv build
+* [`vapoursynth-plugin-mvtools`](https://github.com/dubhater/vapoursynth-mvtools): Realtime motion interpolating playback in mpv
 * [`SVP4`](https://www.svp-team.com/) support, a "proprietary version of MVtools" that is way better
-* `acpitool`: for "battery mode" detection
-* `inxi`: HIDPI-detection
+* [`acpi`](https://sourceforge.net/projects/acpiclient/files/acpiclient/): for "battery mode" detection
+* [`inxi`](https://github.com/smxi/inxi): HIDPI-detection
 * `libvdpau or libva`: for hardware-acceleration support
 * `CUDA/CUVID` support for nvidia users
 
