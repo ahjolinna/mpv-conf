@@ -1,6 +1,6 @@
 #Ahjolinna's MPV conf build (⌐■_■) 
 
-[on hold(/dead) until ffmpeg 3.5 arrives...sigh...or at least mpv becomes compatible with current stable ffmpeg]
+[on hold(/dead) until ffmpeg 3.5 arrives...sigh...or at least if mpv becomes compatible with current stable ffmpeg]
 ---input wanted
 
 ![mpv-conf Preview](http://i.imgur.com/5B881oX.png)
@@ -32,12 +32,12 @@ ytdl ("youtube and a like") support  was  added so it mpv will automatically wor
 ```
 Example: mpv https://vimeo.com/148177620
 ```
-Twitch live streaming info: If you want to watch some live twich.tv video streams you need to install 'livestreamer' app, and to watch them with MPV you need to use this following command :
+Twitch live streaming info: If you want to watch some live twich.tv video streams you need to install ['streamlink'](https://streamlink.github.io/) (livestreamer fork) app, and to watch them with MPV you need to use this following command :
 ```
-livestreamer -p mpv <twitch link> <quality> --player-continuous-http
+streamlink -p mpv <twitch link> <quality> --player-continuous-http
 ``` 
 ```
-Example: livestreamer -p mpv http://www.twitch.tv/angryjoeshow best --player-continuous-http
+Example: streamlink -p mpv https://www.twitch.tv/saddummy best --player-continuous-http
 ```
 
 #### side note:
