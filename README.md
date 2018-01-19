@@ -1,6 +1,6 @@
 #Ahjolinna's MPV conf build (⌐■_■) 
 
-[compatible with MPV 0.23+]
+[on hold(/dead) until ffmpeg 3.5 arrives...sigh...or at least mpv becomes compatible with current stable ffmpeg]
 ---input wanted
 
 ![mpv-conf Preview](http://i.imgur.com/5B881oX.png)
